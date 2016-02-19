@@ -12,13 +12,14 @@ public class TwoDController
 	
 	public TwoDController()
 	{
-		myWallet = new GiantsWallet[3][3];
+		myWallet = new GiantsWallet[3][3];	
+		setupArray();
 		baseFrame = new TwoDFrame(this);
 	}
 	
 	public void start()
 	{
-		setupArray();
+
 	}
 	
 	private void setupArray()
