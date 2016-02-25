@@ -19,9 +19,7 @@ public class TwoDPanel extends JPanel
 	private JTextField editField;
 	private JButton changeButton;
 	private JButton displayButton;
-	
 	private JTable walletTable;
-	 
 	private TwoDController baseController;
 	
 	public TwoDPanel(TwoDController baseController)
@@ -31,13 +29,17 @@ public class TwoDPanel extends JPanel
 		
 		rowField = new JTextField(5);
 		columnField = new JTextField(5);
+		
 		editField = new JTextField(20);
+		
 		currentRupees = new JLabel("The current # of Rupees");
+		
 		changeButton = new JButton("Change the # of Rupees");
+		
 		displayButton = new JButton("Show the # of Rupees");
 		
 		
-		
+		setupLayout();
 		setupTable();
 		setupPanel();
 	}
@@ -47,6 +49,11 @@ public class TwoDPanel extends JPanel
 		String [] columnHeaders = {"Column 0", "Column 1", "Column 2"} ;
 		DefaultTableModel tableModel = new DefaultTableModel(baseController.getMyWallet(), columnHeaders);
 		walletTable = new JTable(tableModel);
+		
+		baseLayout.putConstraint(SpringLayout.NORTH, walletTable, 50, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, walletTable, 50, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, walletTable, 50, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.EAST, walletTable, -50, SpringLayout.EAST, this);
 	}
 	
 	
@@ -57,18 +64,25 @@ public class TwoDPanel extends JPanel
 		this.add(currentRupees);
 		this.add(columnField);
 		this.add(rowField);
+		this.add(editField);
+		this.add(changeButton);
+		this.add(displayButton);
 		
 	}
 	private void setupLayout()
 	{
-		baseLayout.putConstraint(SpringLayout.NORTH, currentRupees, 62, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.WEST, currentRupees, 0, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.NORTH, columnField, -6, SpringLayout.NORTH, currentRupees);
-		baseLayout.putConstraint(SpringLayout.WEST, columnField, 63, SpringLayout.EAST, currentRupees);
-		baseLayout.putConstraint(SpringLayout.NORTH, walletTable, 31, SpringLayout.SOUTH, rowField);
-		baseLayout.putConstraint(SpringLayout.WEST, walletTable, 0, SpringLayout.WEST, currentRupees);
-		baseLayout.putConstraint(SpringLayout.NORTH, rowField, 6, SpringLayout.SOUTH, columnField);
-		baseLayout.putConstraint(SpringLayout.EAST, rowField, 0, SpringLayout.EAST, columnField);
+		baseLayout.putConstraint(SpringLayout.NORTH, rowField, 0, SpringLayout.NORTH, columnField);
+		baseLayout.putConstraint(SpringLayout.WEST, rowField, 21, SpringLayout.EAST, columnField);
+		baseLayout.putConstraint(SpringLayout.WEST, columnField, 10, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, columnField, -67, SpringLayout.NORTH, editField);
+		baseLayout.putConstraint(SpringLayout.WEST, editField, 10, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, editField, -10, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, currentRupees, 0, SpringLayout.WEST, columnField);
+		baseLayout.putConstraint(SpringLayout.NORTH, changeButton, 1, SpringLayout.NORTH, columnField);
+		baseLayout.putConstraint(SpringLayout.EAST, changeButton, -10, SpringLayout.EAST, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, currentRupees, 5, SpringLayout.NORTH, displayButton);
+		baseLayout.putConstraint(SpringLayout.NORTH, displayButton, 15, SpringLayout.SOUTH, changeButton);
+		baseLayout.putConstraint(SpringLayout.WEST, displayButton, 0, SpringLayout.WEST, changeButton);
 	}
 	
 	private void setupListeners()
